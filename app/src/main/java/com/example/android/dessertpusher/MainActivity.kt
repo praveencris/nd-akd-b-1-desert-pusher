@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
             Dessert(R.drawable.oreo, 6000, 20000)
     )
     private var currentDessert = allDesserts[0]
+    private lateinit var desertTimer: DessertTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +75,8 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
             onDessertClicked()
         }
 
-        // TODO (02) Create a DessertTimer
+        // DONE (02) Create a DessertTimer
+        desertTimer= DessertTimer()
 
         // Set the TextViews to the right values
         binding.revenue = revenue
@@ -152,10 +154,11 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
     }
 
     /** Lifecycle Methods **/
-    // TODO (03) Start the DessertTimer in onStart and stop the timer in onStop
+    // DONE (03) Start the DessertTimer in onStart and stop the timer in onStop
 
     override fun onStart() {
         super.onStart()
+        desertTimer.startTimer()
         Timber.i("onStart Called")
     }
 
@@ -171,6 +174,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     override fun onStop() {
         super.onStop()
+        desertTimer.stopTimer()
         Timber.i("onStop Called")
     }
 
